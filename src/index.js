@@ -36,6 +36,26 @@ class LinkedList {
   }
   
 
+  size() {
+    let count = 0
+    let current = this.head
+    while (current) {
+      current = current.nextNode
+      count++
+    }
+    return count
+  }
+
+  getHead() {
+    let head = this.head
+    return head
+  }
+
+  getTail() {
+    let tail = this.tail
+    return tail
+  }
+
   removeFromHead() {
     if (this.head === null) {
       return null;
@@ -70,12 +90,10 @@ list.append('f');
 list.append('g');
 list.append(';');
 
-list.prepend('head')
+list.prepend('newhead')
+list.append('tail')
 
-list.print(); // Output: 1 -> 2 -> 3
-
-list.removeFromHead();
-list.print(); // Output: 2 -> 3
+console.log(list.getTail())
 
 
 
