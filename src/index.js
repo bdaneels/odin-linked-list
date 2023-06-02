@@ -56,6 +56,10 @@ class LinkedList {
     return tail
   }
 
+  at(index) {
+    return 
+  }
+
   removeFromHead() {
     if (this.head === null) {
       return null;
