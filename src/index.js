@@ -1,4 +1,3 @@
-
 class Node {
   constructor(value) {
     this.value = value;
@@ -56,9 +55,31 @@ class LinkedList {
     return tail
   }
 
-  at(index) {
-    return 
+  insertAt(index, value) {
+  if (index === 0) {
+    this.prepend(value);
+    return;
   }
+
+  const newNode = new Node(value);
+  let current = this.head;
+  let previous = null;
+  let currentIndex = 0;
+
+  while (current && currentIndex < index) {
+    previous = current;
+    current = current.nextNode;
+    currentIndex++;
+  }
+
+  if (currentIndex === index) {
+    previous.nextNode = newNode;
+    newNode.nextNode = current;
+    if (current === null) {
+      this.tail = newNode;
+    }
+  }
+}
 
   removeFromHead() {
     if (this.head === null) {
@@ -67,6 +88,106 @@ class LinkedList {
 
     const removedValue = this.head.value;
     this.head = this.head.nextNode;
+
+    if (this.head === null) {
+      this.tail = null;
+    }
+
+    return removedValue;
+  }
+
+  removeAt(index) {
+  if (index === 0) {
+    this.removeFromHead();
+    return;
+  }
+
+  
+  let current = this.head;
+  let previous = null;
+  let currentIndex = 0;
+
+  while (current && currentIndex < index) {
+    previous = current;
+    current = current.nextNode;
+    currentIndex++;
+  }
+
+  if (currentIndex === index) {
+    previous.nextNode = current.nextNode;
+    if (current === null) {
+      this.tail = previous;
+    }
+  }
+}
+
+  removeFromHead() {
+    if (this.head === null) {
+      return null;
+    }
+
+    const removedValue = this.head.value;
+    this.head = this.head.nextNode;
+
+    if (this.head === null) {
+      this.tail = null;
+    }
+
+    return removedValue;
+  }
+
+  contains(value) {
+    
+    let current = this.head
+    for (let i = 0; i < this.size(); i++) {
+      if (current.value === value) {
+        return true
+
+      } else {
+        current = current.nextNode
+      }
+      
+    }
+    return false
+  }
+
+  find(value) {
+    
+    let current = this.head
+    for (let i = 0; i < this.size(); i++) {
+      if (current.value === value) {
+        return i
+
+      } else {
+        current = current.nextNode
+      }
+      
+    }
+    return null
+  }
+
+  pop() {
+    if (this.head === null) {
+      return null;
+    }
+
+    const removedValue = this.tail.value;
+    let penultimateNodeIndex = this.size() - 2
+
+    let current = this.head
+    for (let i = 0; i < this.size(); i++){
+      if (penultimateNodeIndex === i) {
+        
+        current.nextNode = null
+        this.tail = current
+        break
+
+      } else {
+        current = current.nextNode
+      }
+    }
+
+    
 
     if (this.head === null) {
       this.tail = null;
@@ -92,12 +213,13 @@ class LinkedList {
 const list = new LinkedList();
 list.append('f');
 list.append('g');
-list.append(';');
+list.append('h');
 
-list.prepend('newhead')
-list.append('tail')
 
-console.log(list.getTail())
+list.removeAt(1)
+
+list.print()
+
 
 
 
